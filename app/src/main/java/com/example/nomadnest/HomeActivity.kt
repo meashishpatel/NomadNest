@@ -27,5 +27,9 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, PlanTripActivity::class.java)
             startActivity(intent)
         }
+        binding.settings.setOnClickListener{
+            val intent = Intent(this, Settings::class.java)
+            startActivity(intent)
+        }
     }
 }

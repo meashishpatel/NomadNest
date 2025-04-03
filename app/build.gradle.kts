@@ -73,4 +73,6 @@ dependencies {
     implementation (libs.androidx.room.ktx) // Coroutine support for Room
 
     implementation (libs.lottie) // lottie animation
+
+    implementation ("com.google.android.material:material:1.10.0")
 }

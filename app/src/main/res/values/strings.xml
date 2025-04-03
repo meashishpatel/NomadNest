@@ -81,4 +81,30 @@
     </string>
 
 
+    <string name="full_name">
+        Full Name
+    </string>
+
+
+    <string name="user_gmail">
+        user@gmail.com
+    </string>
+
+    <string name="pinfo">
+        Personal Info
+    </string>
+
+    <string name="logout">
+        Logout
+    </string>
+
+    <string name="help">
+        Help And Support
+    </string>
+
+    <string name="security">
+        Account and Security
+    </string>
+    <string name="yes_logout">Yes, Logout</string>
+
 </resources>

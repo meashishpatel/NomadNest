@@ -38,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         db = AppDatabase.getDatabase(this)
         firestore = FirebaseFirestore.getInstance()
 
+
         val userId = auth.currentUser?.uid ?: return
         lifecycleScope.launch(Dispatchers.IO) {
             val user = db.userDao().getUser(userId)

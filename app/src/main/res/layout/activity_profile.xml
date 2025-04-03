@@ -8,6 +8,14 @@
     android:id="@+id/main"
     tools:context=".ProfileActivity">
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/leftnavigationic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"/>
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="125dp"
