@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">NomadNest</string>
+
+
+    <string name="nomad">
+        NomadNest
+    </string>
+
+    <string name="slogan">
+        Explore the world
+    </string>
+
+    <string name="getStarted">
+        Let\u0027s Get Started
+    </string>
+    <string name="createyouraccount">
+        Create Your Account
+    </string>
+
+    <string name="welcome_to_">
+        Welcome to your journey! We\'re thrilled to have you here.
+    </string>
+
+
+    <string name="text_button_google">
+        Continue with Google
+    </string>
+
+    <string name="text_button_facebook">
+        Continue with Google
+    </string>
+
+    <string name="text_button_apple">
+        Continue with Google
+    </string>
+
+    <string name="text_button_login">
+        Login
+    </string>
+
+
+    <string name="please_fill">
+        Please fill in your details to create your account and enjoy our services.
+    </string>
+    <string name="sign_up">
+        Sign Up
+    </string>
+    <string name="already">
+        Already have an account?
+    </string>
+
+    <string name="title_name">
+        Full Name
+    </string>
+    <string name="title_email">
+        Email
+    </string>
+
+    <string name="title_password">
+        Password
+    </string>
+
+
+    <string name="personal_info_title">
+        Personal Info
+    </string>
+
+    <string name="save">Save</string>
+
+
+    <string name="all_your_tr">
+        All your trips in one place
+    </string>
+
+
+    <string name="press_start">
+        Press start to add your first trip
+    </string>
+    <string name="plan">
+        Plan Trips
+    </string>
+
+
+</resources>

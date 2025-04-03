@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "32543453168",
+    "project_id": "nomadnest-f3dc8",
+    "storage_bucket": "nomadnest-f3dc8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32543453168:android:a6ce7a41fca2886b2a7735",
+        "android_client_info": {
+          "package_name": "com.example.nomadnest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkIr8WD390KGlywKHgaJdt978WwHBjY6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

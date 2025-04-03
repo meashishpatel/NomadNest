@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_background"
+        android:alpha="0.1"/>
+
+    <ImageView
+        android:id="@+id/SplashActivityLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash_img"
+        app:layout_constraintTop_toTopOf="@+id/guideline30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/NomadNestTV"/>
+
+    <TextView
+        android:id="@+id/NomadNestTV"
+        android:layout_width="241.56dp"
+        android:layout_height="40dp"
+        android:text="@string/nomad"
+        android:textAppearance="@style/nomad"
+        android:lineSpacingExtra="1sp"
+        android:translationY="-0.64sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/SplashActivityLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sloganTV"/>
+
+    <TextView
+        android:id="@+id/sloganTV"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:lineSpacingExtra="1sp"
+        android:text="@string/slogan"
+        android:textAppearance="@style/slogan"
+        android:translationY="-0.64sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/NomadNestTV" />
+
+    <!-- Vertical centering guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="512dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
