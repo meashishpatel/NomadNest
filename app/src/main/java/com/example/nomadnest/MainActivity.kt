@@ -19,11 +19,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        enableEdgeToEdge()
         binding.signuptextview.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-        binding.loginBtn.setOnClickListener{
+        binding.loginbtn.setOnClickListener{
             val intent = Intent(this, AuthenticationActivity::class.java)
             startActivity(intent)
         }

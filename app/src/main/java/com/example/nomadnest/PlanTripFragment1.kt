@@ -1,0 +1,53 @@
+package com.example.nomadnest
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ProgressBar
+import com.example.nomadnest.databinding.FragmentPlanBinding
+import com.example.nomadnest.databinding.FragmentPlanTrip1Binding
+
+
+class PlanTripFragment1 : Fragment() {
+
+    private var _binding: FragmentPlanTrip1Binding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPlanTrip1Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (activity as? TripDetailsActivity)?.updateProgressBar(25)
+
+        // Handle Next Button Click
+        binding.nextbtn.setOnClickListener {
+            loadFragment(PlanTripFragment2())  // Load Next Fragment
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as? TripDetailsActivity)?.updateProgressBar(25)  // Update progress when coming back
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)  // Replace Fragment
+            .addToBackStack(null)  // Allow Back Navigation
+            .commit()
+    }
+}

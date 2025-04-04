@@ -106,5 +106,71 @@
         Account and Security
     </string>
     <string name="yes_logout">Yes, Logout</string>
+    <string name="country">Country</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="gender">Gender</string>
+    <string name="bio">Bio</string>
+    <string name="log_in_to_your_account">Log In To Your Account</string>
+    <string name="welcome_back_login">Welcome back! Please log in to your account \n to continue where you left off.</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="remember_me">Remember me?</string>
+    <string name="explore">Explore</string>
+    <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="getstrtedwithplan">
+        Let\'s get started by selecting where are you going.
+    </string>
+    <string name="search">Search</string>
+    <string name="select_from_best_location_in_2024">Select From Best Location in 2024!</string>
+    <string name="when_adventure_title">When Will your Adventure Begin And End?</string>
+
+
+    <string name="chooseDate">
+        Choose the dates for your trip. This helps us plan the perfect itinerary for your travel period.
+    </string>
+
+
+    <string name="set_your_trip_budget">
+        Set your trip budget
+    </string>
+
+    <string name="know_preference">
+        Let us know your budget preference, and we\'ll craft an itinerary that suits your financial comfort.
+    </string>
+
+    <string name="cheapsub">
+        Budget-friendly, economical travel.
+    </string>
+    <string name="cheap">
+        Cheap
+    </string>
+
+    <string name="economicsub">
+        Moderate Spending for a balanced trip.
+    </string>
+    <string name="economic">
+        Economic
+    </string>
+
+    <string name="luxurysub">
+        High-end, indulgent experiences.
+    </string>
+    <string name="luxury">
+        Luxury
+    </string>
+
+    <string name="flexiblesub">
+        No budget restrictions.
+    </string>
+    <string name="flexible">
+        Flexible
+    </string>
+    <string name="destination">Destination</string>
+    <string name="dates">Dates</string>
+    <string name="jantojan">January 21 to January 22, 2025</string>
+    <string name="budget">Budget</string>
+    <string name="nature_escapes">Nature Escapes</string>
 
 </resources>

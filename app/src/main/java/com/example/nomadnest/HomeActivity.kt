@@ -1,11 +1,10 @@
 package com.example.nomadnest
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.nomadnest.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -19,17 +18,36 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.gotoprofilebtn.setOnClickListener{
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+
+        // Load ExploreFragment by default
+        if (savedInstanceState == null) {
+            loadFragment(ExploreFragment())
         }
-        binding.plantrip.setOnClickListener{
-            val intent = Intent(this, PlanTripActivity::class.java)
-            startActivity(intent)
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_explore -> {
+                    loadFragment(ExploreFragment())
+                    true
+                }
+                R.id.nav_save -> {
+                    loadFragment(SaveFragment())
+                    true
+                }
+                R.id.nav_plan -> {
+                    loadFragment(PlanFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
-        binding.settings.setOnClickListener{
-            val intent = Intent(this, Settings::class.java)
-            startActivity(intent)
-        }
+    }
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }

@@ -93,4 +93,32 @@
         <item name="android:textColor">#323D76</item>
     </style>
 
+
+    <style name="forget_password">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#3F52B4</item>
+    </style>
+
+    <string name="whereisgoing">
+        Where is going?
+    </string>
+
+
+    <style name="getstartedwithplan">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#4B4F63</item>
+    </style>
+
+
+    <style name="budgetsubstring">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#4B4F63</item>
+    </style>
+
+    <style name="budgettitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#373B51</item>
+    </style>
 </resources>

@@ -1,237 +1,266 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     tools:context=".LoginActivity">
 
+    <!-- Background Frame -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_bg" />
 
+    <!-- Title -->
+    <TextView
+        android:id="@+id/login_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in_to_your_account"
+        android:textAppearance="@style/getStarted"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
 
-        <!-- Background Frame -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/home_bg"/>
+    <TextView
+        android:id="@+id/welcome_back_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_back_login"
+        android:textAppearance="@style/welcome_to_"
+        android:gravity="center"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintTop_toBottomOf="@id/login_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
 
+    <!-- Email -->
+    <TextView
+        android:id="@+id/emailTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_email"
+        android:textAppearance="@style/title_text"
+        app:layout_constraintTop_toBottomOf="@id/welcome_back_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp" />
 
-        <TextView
-            android:id="@+id/emailTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_email"
-            android:textAppearance="@style/title_text"
-            android:layout_marginStart="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/emailET"/>
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/title_email"
+        android:drawableStart="@drawable/email_ic"
+        android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:background="@drawable/buttons_bg"
+        app:layout_constraintTop_toBottomOf="@id/emailTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/emailET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttons_bg"
-            android:textSize="16dp"
-            android:hint="Email"
-            android:drawableStart="@drawable/email_ic"
-            android:drawablePadding="8dp"
-            android:layout_marginStart="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailTV"
-            app:layout_constraintBottom_toTopOf="@id/passwordTV"
-            app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Password -->
+    <TextView
+        android:id="@+id/passwordTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_password"
+        android:textAppearance="@style/title_text"
+        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/passwordTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_password"
-            android:textAppearance="@style/title_text"
-            android:layout_marginStart="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailET"
-            app:layout_constraintBottom_toTopOf="@id/passwordET"/>
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/title_password"
+        android:drawableStart="@drawable/password_ic"
+        android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:background="@drawable/buttons_bg"
+        app:layout_constraintTop_toBottomOf="@id/passwordTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/passwordET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttons_bg"
-            android:textSize="16dp"
-            android:hint="Password"
-            android:drawableStart="@drawable/password_ic"
-            android:drawablePadding="8dp"
-            android:layout_marginStart="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordTV"
-            app:layout_constraintBottom_toTopOf="@id/loginBtn"
-            app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Login Button -->
+    <FrameLayout
+        android:id="@+id/loginBtn"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/blue_btn_bg"
+        app:layout_constraintTop_toBottomOf="@id/passwordET"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
 
-
-        <!-- Login Button -->
-        <FrameLayout
-            android:id="@+id/loginBtn"
-            android:layout_width="343dp"
-            android:layout_height="48dp"
-            android:background="@drawable/blue_btn_bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordET"
-            app:layout_constraintBottom_toTopOf="@id/divider">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_button_login"
-                    android:textAppearance="@style/text_button_login"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:gravity="center"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
-
-        <!-- Divider Section -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginBtn"
-            app:layout_constraintBottom_toTopOf="@id/googleapplefbll">
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider1"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                app:dividerColor="@color/grey"
-                app:layout_constraintWidth_percent="0.4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/orTextView"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/orTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Or"
-                android:textColor="@color/grey"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@id/divider1"
-                app:layout_constraintEnd_toStartOf="@id/divider2"
+                android:text="@string/text_button_login"
+                android:textAppearance="@style/text_button_login"
+                android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider2"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                app:dividerColor="@color/grey"
-                app:layout_constraintWidth_percent="0.4"
-                app:layout_constraintStart_toEndOf="@id/orTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
-        <LinearLayout
-            android:id="@+id/googleapplefbll"
-            android:layout_width="match_parent"
+    <!-- Remember me + Forgot Password -->
+    <LinearLayout
+        android:id="@+id/remembermelinarlayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="2">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/alreadyhaveanaccountll">
-            <FrameLayout
-                android:id="@+id/continue_with_google_btn"
-                android:layout_width="103dp"
-                android:layout_height="48dp"
-                android:background="@drawable/buttons_bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="parent"
-                android:layout_marginEnd="8dp">
+            android:layout_weight="2"
+            android:text="@string/remember_me"
+            android:paddingStart="8dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/google_ic"
-                        android:layout_marginEnd="8dp" />
-                </LinearLayout>
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/continue_with_facebook_btn"
-                android:layout_width="103dp"
-                android:layout_height="48dp"
-                android:background="@drawable/buttons_bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="parent"
-                android:layout_marginEnd="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/facebook_ic"
-                        android:layout_marginEnd="8dp" />
-                </LinearLayout>
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/continue_with_apple_btn"
-                android:layout_width="103dp"
-                android:layout_height="48dp"
-                android:background="@drawable/buttons_bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/apple_ic"
-                        android:layout_marginEnd="8dp" />
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/alreadyhaveanaccountll"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_link"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/googleapplefbll"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:text="@string/forgot_password"
+            android:textAppearance="@style/forget_password" />
+    </LinearLayout>
 
+    <!-- Divider with OR -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/remembermelinarlayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:dividerColor="@color/grey"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/orTextView"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/orTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/divider1"
+            app:layout_constraintEnd_toStartOf="@id/divider2" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:dividerColor="@color/grey"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintStart_toEndOf="@id/orTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Social Login Buttons -->
+    <LinearLayout
+        android:id="@+id/googleapplefbll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <!-- Repeatable FrameLayout for each social button -->
+        <!-- Google -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/buttons_bg">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/google_ic" />
+        </FrameLayout>
+
+        <!-- Facebook -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/buttons_bg">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/facebook_ic" />
+        </FrameLayout>
+
+        <!-- Apple -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/buttons_bg">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/apple_ic" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Already Have Account? -->
+    <LinearLayout
+        android:id="@+id/alreadyhaveanaccountll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/googleapplefbll"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <!-- Texts or buttons go here -->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

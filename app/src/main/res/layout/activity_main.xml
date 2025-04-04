@@ -1,52 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/home_bg"/>
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:id="@+id/main"
+    android:padding="24dp"
+    android:background="@drawable/home_bg">
 
     <TextView
         android:id="@+id/getStartedTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/getStarted"
-        android:layout_marginTop="100dp"
         android:textAppearance="@style/getStarted"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/welcome_toTV"/>
+        android:layout_marginTop="60dp"/>
 
     <TextView
         android:id="@+id/welcome_toTV"
-        android:layout_width="343dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/welcome_to_"
         android:textAppearance="@style/welcome_to_"
-        android:lineSpacingExtra="5sp"
-        android:gravity="center_horizontal|center_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/getStartedTV"
-        app:layout_constraintBottom_toTopOf="@id/continue_with_google_btn"/>
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
 
-
+    <!-- Google Button -->
     <FrameLayout
         android:id="@+id/continue_with_google_btn"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_toTV"
-        app:layout_constraintBottom_toTopOf="@id/continue_with_facebook_btn">
+        android:layout_marginTop="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,21 +52,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_button_google"
-                android:textAppearance="@style/text_button"
-                android:lineSpacingExtra="-3sp"
-                android:gravity="center_vertical" />
+                android:textAppearance="@style/text_button"/>
         </LinearLayout>
     </FrameLayout>
 
+    <!-- Facebook Button -->
     <FrameLayout
         android:id="@+id/continue_with_facebook_btn"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continue_with_google_btn"
-        app:layout_constraintBottom_toTopOf="@id/continue_with_apple_btn">
+        android:layout_marginTop="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,25 +77,20 @@
                 android:layout_marginEnd="8dp" />
 
             <TextView
-                android:id="@+id/text_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_button_facebook"
-                android:textAppearance="@style/text_button"
-                android:lineSpacingExtra="-3sp"
-                android:gravity="center_vertical" />
+                android:textAppearance="@style/text_button"/>
         </LinearLayout>
     </FrameLayout>
 
+    <!-- Apple Button -->
     <FrameLayout
         android:id="@+id/continue_with_apple_btn"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continue_with_facebook_btn"
-        app:layout_constraintBottom_toTopOf="@id/divider">
+        android:layout_marginTop="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,23 +108,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_button_apple"
-                android:textAppearance="@style/text_button"
-                android:lineSpacingExtra="-3sp"
-                android:gravity="center_vertical" />
+                android:textAppearance="@style/text_button"/>
         </LinearLayout>
     </FrameLayout>
 
-<!--    Divider-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="8dp"
         android:layout_height="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/continue_with_apple_btn"
-        app:layout_constraintBottom_toTopOf="@id/login_btn">
+        app:layout_constraintBottom_toTopOf="@id/loginbtn">
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider1"
@@ -182,39 +158,34 @@
             app:layout_constraintWidth_percent="0.4"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Login Button -->
     <FrameLayout
-        android:id="@+id/login_btn"
+        android:id="@+id/loginbtn"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/blue_btn_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        android:layout_marginTop="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_button_login"
-                android:textAppearance="@style/text_button_login"
-                android:lineSpacingExtra="-3sp"
-                android:gravity="center_vertical" />
+                android:textAppearance="@style/text_button_login"/>
         </LinearLayout>
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintNested4"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn"
-        app:layout_constraintBottom_toBottomOf="parent">
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/dna1textview"
@@ -222,9 +193,10 @@
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
             app:layout_constraintEnd_toStartOf="@id/signuptextview"
-            app:layout_constraintStart_toStartOf="@id/constraintNested4"
-            app:layout_constraintTop_toTopOf="@id/constraintNested4"
-            app:layout_constraintBottom_toBottomOf="@id/constraintNested4"/>
+            app:layout_constraintStart_toStartOf="@id/linear1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <TextView
             android:id="@+id/signuptextview"
             android:layout_width="wrap_content"
@@ -234,8 +206,8 @@
             android:textStyle="bold"
             android:layout_marginStart="5dp"
             app:layout_constraintStart_toEndOf="@id/dna1textview"
-            app:layout_constraintTop_toTopOf="@id/constraintNested4"
-            app:layout_constraintBottom_toBottomOf="@id/constraintNested4"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
