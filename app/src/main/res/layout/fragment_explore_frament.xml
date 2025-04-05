@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -41,6 +41,7 @@
                         android:gravity="center_vertical">
 
                         <ImageView
+                            android:id="@+id/searchbtn"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="10dp"
@@ -60,9 +61,12 @@
                                 android:textColor="@color/black"/>
 
                             <EditText
+                                android:id="@+id/searchbox"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:hint="Where • When • Who"
+                                android:imeOptions="actionSearch"
+                                android:inputType="text"
                                 android:background="@android:color/transparent"
                                 android:textSize="14sp"
                                 android:textColor="@color/grey"/>
@@ -72,6 +76,108 @@
                 </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/locationCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/card_gradient_background"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/card_gradient_background"> <!-- Optional background -->
+
+                <TextView
+                    android:id="@+id/locationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location: Fetching..."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/latLngText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lat, Lng: Fetching..."
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/weatherBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/weatherConditionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Condition: Fetching..."
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/weatherTempText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Temp: --°C"
+                    android:textSize="14sp" />
+
+                <!-- Additional Weather Details -->
+                <TextView android:id="@+id/weatherFeelsLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Feels like: --°C" />
+
+                <TextView android:id="@+id/weatherHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidity: --%" />
+
+                <TextView android:id="@+id/weatherVisibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visibility: -- m" />
+
+                <TextView android:id="@+id/weatherWindSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wind Speed: -- m/s" />
+
+                <TextView android:id="@+id/weatherSunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunrise: --" />
+
+                <TextView android:id="@+id/weatherSunset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunset: --" />
+
+                <TextView android:id="@+id/weatherSeaLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sea Level: -- hPa" />
+
+                <TextView android:id="@+id/weatherMinMax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min/Max: -- / -- °C" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
 
         <TextView
             android:id="@+id/categoryTV"
@@ -85,10 +191,15 @@
             android:layout_marginStart="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPhotos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"/>
     </LinearLayout>
-
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -132,6 +132,7 @@
         android:weightSum="2">
 
         <CheckBox
+            android:id="@+id/stayLoggedInCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -139,11 +140,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="@string/remember_me"
+            android:text="@string/stay"
             android:paddingStart="8dp" />
 
         <TextView
-            android:id="@+id/text_link"
+            android:id="@+id/forget_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"

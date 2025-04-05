@@ -113,7 +113,7 @@
     <string name="log_in_to_your_account">Log In To Your Account</string>
     <string name="welcome_back_login">Welcome back! Please log in to your account \n to continue where you left off.</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="remember_me">Remember me?</string>
+    <string name="stay">Stay Logged In</string>
     <string name="explore">Explore</string>
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -172,5 +172,8 @@
     <string name="jantojan">January 21 to January 22, 2025</string>
     <string name="budget">Budget</string>
     <string name="nature_escapes">Nature Escapes</string>
+    <string name="location_permission">Location Permission</string>
+    <string name="what_is_your_location">What Is Your Location</string>
+    <string name="loc_desc">We need to know your location in order to suggest nearby services</string>
 
 </resources>

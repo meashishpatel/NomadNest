@@ -27,12 +27,19 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE)
 
         binding.loginBtn.setOnClickListener {
-            val email = binding.emailET.text.toString()
-            val password = binding.passwordET.text.toString()
+            val email = binding.emailET.text.toString().trim()
+            val password = binding.passwordET.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    sharedPreferences.edit() { putLong("lastLogin", System.currentTimeMillis()) }
+                    if (binding.stayLoggedInCheckBox.isChecked) {
+                        sharedPreferences.edit { putLong("lastLogin", System.currentTimeMillis()) }
+                    }
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 } else {
@@ -40,5 +47,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.forgetPassword.setOnClickListener {
+            val email = binding.emailET.text.toString()
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Please enter your email to reset password", Toast.LENGTH_SHORT).show()
+            } else {
+                auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Reset link sent to your email", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
     }
 }

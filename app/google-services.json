@@ -12,7 +12,20 @@
           "package_name": "com.example.nomadnest"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "32543453168-80m7r6s48g3v11plk2lupa1m98dm8h9m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nomadnest",
+            "certificate_hash": "cd2e31b3d8dd696e4cefa4ae73990dbcc56208e6"
+          }
+        },
+        {
+          "client_id": "32543453168-buhr1btvh6l7v0t63e4inseq36q69hnl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDkIr8WD390KGlywKHgaJdt978WwHBjY6o"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32543453168-buhr1btvh6l7v0t63e4inseq36q69hnl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
