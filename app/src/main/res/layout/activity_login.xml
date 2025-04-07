@@ -54,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_email"
+        android:maxLines="1"
         android:drawableStart="@drawable/email_ic"
         android:drawablePadding="10dp"
         android:padding="12dp"
@@ -79,6 +80,7 @@
         android:id="@+id/passwordET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:hint="@string/title_password"
         android:drawableStart="@drawable/password_ic"
         android:drawablePadding="10dp"
@@ -207,6 +209,7 @@
         <!-- Repeatable FrameLayout for each social button -->
         <!-- Google -->
         <FrameLayout
+            android:id="@+id/loginwithgoogle"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -222,6 +225,7 @@
 
         <!-- Facebook -->
         <FrameLayout
+            android:id="@+id/loginwithFB"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -237,6 +241,7 @@
 
         <!-- Apple -->
         <FrameLayout
+            android:id="@+id/loginwithApple"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"

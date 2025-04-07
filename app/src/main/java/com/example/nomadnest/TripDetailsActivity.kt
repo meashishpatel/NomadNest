@@ -41,27 +41,6 @@ class TripDetailsActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             loadFragment(PlanTripFragment1())
         }
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_explore -> {
-                    loadFragment(ExploreFragment())
-                    true
-                }
-                R.id.nav_save -> {
-                    loadFragment(SaveFragment())
-                    true
-                }
-                R.id.nav_plan -> {
-                    loadFragment(PlanFragment())
-                    true
-                }
-                R.id.nav_profile -> {
-                    loadFragment(ProfileFragment())
-                    true
-                }
-                else -> false
-            }
-        }
 
 
 //        auth = FirebaseAuth.getInstance()

@@ -28,14 +28,21 @@ import android.app.AlertDialog
 import android.widget.Button
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat;
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
-class ExploreFragment : Fragment() {
+class ExploreFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentExploreFramentBinding? = null
     private val binding get() = _binding!!
     private val apiKey = "hNZUWMh0arq8aRNHLgNllKXcryGFHtNWX5VOL9S9PtxKm37nnnnPypQt"
     private val weatherApiKey = "ddc71934dab246249b9a80326c66ce06"
+
+    private lateinit var mMap: GoogleMap
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -51,6 +58,7 @@ class ExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
 
         binding.recyclerViewPhotos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -186,7 +194,6 @@ class ExploreFragment : Fragment() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             location?.let {
                 binding.latLngText.text = "Lat, Lng: ${it.latitude}, ${it.longitude}"
@@ -275,11 +282,16 @@ class ExploreFragment : Fragment() {
             }
         }
     }
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
 
 
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
+    }
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1001
     }
 }
-

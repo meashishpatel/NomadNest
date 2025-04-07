@@ -51,6 +51,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/locationSuggestionsRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/searchET"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/selectedLocationContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/selected_location_bg"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/locationSuggestionsRV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/location_ic"
+            android:contentDescription="Location" />
+
+        <TextView
+            android:id="@+id/selectedLocationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected: None"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/bestLocTV"
@@ -61,7 +102,7 @@
         android:textStyle="bold"
         android:lineSpacingExtra="0sp"
         android:gravity="top"
-        app:layout_constraintTop_toBottomOf="@id/searchET"
+        app:layout_constraintTop_toBottomOf="@id/selectedLocationContainer"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="45dp"/>
 
@@ -132,6 +173,9 @@
     <FrameLayout
         android:id="@+id/nextbtn"
         android:layout_width="343dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
         android:layout_height="48dp"
         android:background="@drawable/grey_btn_bg"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/nextText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Next"

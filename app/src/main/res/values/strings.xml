@@ -27,11 +27,11 @@
     </string>
 
     <string name="text_button_facebook">
-        Continue with Google
+        Continue with Facebook
     </string>
 
     <string name="text_button_apple">
-        Continue with Google
+        Continue with Apple
     </string>
 
     <string name="text_button_login">
@@ -74,7 +74,7 @@
 
 
     <string name="press_start">
-        Press start to add your first trip
+        Press start to add your trip
     </string>
     <string name="plan">
         Plan Trips

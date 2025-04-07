@@ -170,7 +170,7 @@
     </androidx.cardview.widget.CardView>
 
     <FrameLayout
-        android:id="@+id/nextbtn"
+        android:id="@+id/confirmbtn"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/blue_btn_bg"

@@ -30,7 +30,7 @@
 
     <!-- Google Button -->
     <FrameLayout
-        android:id="@+id/continue_with_google_btn"
+        android:id="@+id/continuewithgooglebtnm"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
@@ -58,7 +58,7 @@
 
     <!-- Facebook Button -->
     <FrameLayout
-        android:id="@+id/continue_with_facebook_btn"
+        android:id="@+id/continuewithfacebookbtnm"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
@@ -86,7 +86,7 @@
 
     <!-- Apple Button -->
     <FrameLayout
-        android:id="@+id/continue_with_apple_btn"
+        android:id="@+id/continuewithapplebtnm"
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:background="@drawable/buttons_bg"
@@ -120,7 +120,7 @@
         android:layout_height="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continue_with_apple_btn"
+        app:layout_constraintTop_toBottomOf="@id/continuewithapplebtnm"
         app:layout_constraintBottom_toTopOf="@id/loginbtn">
 
         <com.google.android.material.divider.MaterialDivider
