@@ -8,5 +8,5 @@ data class Trip(
     @PrimaryKey val userId: String,
     val destination: String,
     val date: String,
-    val budget: Int
+    val budget: String
 )
