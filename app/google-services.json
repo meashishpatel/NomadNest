@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "32543453168",
+    "firebase_url": "https://nomadnest-f3dc8-default-rtdb.firebaseio.com",
     "project_id": "nomadnest-f3dc8",
     "storage_bucket": "nomadnest-f3dc8.firebasestorage.app"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "32543453168-7qe7begml67fop94o5q9nn1bqpnioqh3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nomadnest",
+            "certificate_hash": "86e827648c94b771712b1676319a32450930ca36"
+          }
+        },
         {
           "client_id": "32543453168-80m7r6s48g3v11plk2lupa1m98dm8h9m.apps.googleusercontent.com",
           "client_type": 1,

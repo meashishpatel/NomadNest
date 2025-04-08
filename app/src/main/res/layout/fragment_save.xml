@@ -17,6 +17,7 @@
         android:paddingBottom="8dp" />
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tripsRecyclerView"
         android:layout_width="match_parent"

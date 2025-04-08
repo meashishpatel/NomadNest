@@ -25,9 +25,6 @@ class TripDetailsActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
     private lateinit var firestore: FirebaseFirestore
 
-    private var currentFragmentIndex = 1
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -40,40 +37,37 @@ class TripDetailsActivity : AppCompatActivity() {
             insets
         }
 
-
-        if (savedInstanceState == null) {
-            loadFragment(1)
+        binding.backbtn.setOnClickListener{
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+            when (currentFragment){
+                is PlanTripFragment1 ->{
+                    loadFragment(PlanFragment())
+                }
+                is PlanTripFragment2 ->{
+                    loadFragment(PlanTripFragment1())
+                }
+                is PlanTripFragment3 ->{
+                    loadFragment(PlanTripFragment2())
+                }
+                is PlanTripFragment4 ->{
+                    loadFragment(PlanTripFragment3())
+                }
+            }
         }
 
-        binding.backbtn.setOnClickListener {
-            when (currentFragmentIndex) {
-                1 -> finish()
-                2 -> loadFragment(1)
-                3 -> loadFragment(2)
-                4 -> loadFragment(3)
-            }
+        if (savedInstanceState == null) {
+            loadFragment(PlanTripFragment1())
         }
 
     }
 
-    private fun loadFragment(index: Int) {
-        val fragment = when (index) {
-            1 -> PlanTripFragment1()
-            2 -> PlanTripFragment2()
-            3 -> PlanTripFragment3()
-            4 -> PlanTripFragment4()
-            else -> PlanTripFragment1()
-        }
+    private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
-
-        currentFragmentIndex = index
     }
 
     fun updateProgressBar(progress: Int) {
         binding.progressBar.progress = progress
     }
-
-
 }

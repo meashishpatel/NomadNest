@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.example.nomadnest.databinding.DialogLocationPermissionBinding
 
-class LocationPermissionDialogFragment : DialogFragment() {
+class LocationPermissionDialogFragment(private val onAllowClicked: () -> Unit) : DialogFragment() {
 
     private var _binding: DialogLocationPermissionBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +30,7 @@ class LocationPermissionDialogFragment : DialogFragment() {
         // Handle Allow button click
         binding.allowButton.setOnClickListener {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1001)
+            onAllowClicked()
             dismiss()
         }
 

@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.content.Context
+import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.fragment.app.activityViewModels
@@ -47,48 +48,34 @@ class PlanTripFragment4 : Fragment() {
         firestore = FirebaseFirestore.getInstance()
         updateTripDetailsUI(sharedViewModel)
 
-        binding.confirmbtn.setOnClickListener {
+        binding.confirmbtn.setOnClickListener{
             val userId = auth.currentUser?.uid
             if (userId == null) {
                 Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
             val location = sharedViewModel.selectedLocation
             val date = sharedViewModel.selectedDate
             val budget = sharedViewModel.selectedBudget
-
-            if (location.isNullOrEmpty() || date.isNullOrEmpty() || budget.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "Please fill all trip details", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
             val trip = Trip(
                 userId = userId,
-                destination = location,
-                date = date,
-                budget = budget
+                destination = location ?: "Unknown",
+                date = date ?: "N/A",
+                budget = budget ?: "N/A",
             )
-
             lifecycleScope.launch(Dispatchers.IO) {
-                val existing = db.tripDao().getTripByDestination(location)
-                if (existing == null) {
-                    db.tripDao().insertTrip(trip)
-                    launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Trip saved locally", Toast.LENGTH_SHORT).show()
-                    }
+                db.tripDao().insertTrip(trip)
 
-                    if (isNetworkAvailable()) {
-                        syncTripDetails(trip)
-                    }
-                } else {
-                    launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Trip already exists!", Toast.LENGTH_SHORT).show()
-                    }
+                if (isNetworkAvailable()) {
+                    syncTripDetails(trip)
                 }
             }
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireContext(), "Trip saved successfully!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), HomeActivity::class.java)
+                startActivity(intent)
+            }
         }
-
 
         binding.editdestination.setOnClickListener {
             showInputDialog("Edit Destination", sharedViewModel.selectedLocation ?: "") { newText ->
@@ -160,12 +147,5 @@ class PlanTripFragment4 : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)  // Replace Fragment
-            .addToBackStack(null)  // Allow Back Navigation
-            .commit()
     }
 }

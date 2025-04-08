@@ -34,6 +34,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.text.SimpleDateFormat
+import java.util.TimeZone
+import androidx.core.view.isVisible
 
 
 class ExploreFragment : Fragment(){
@@ -96,8 +99,6 @@ class ExploreFragment : Fragment(){
             val query = categoryToQuery[selectedCategory.name] ?: "nature"
             if(query == "seeNearby"){
                 askForLocation()
-                binding.youareatTV.visibility = View.VISIBLE
-                binding.mapcard.visibility = View.VISIBLE
             }
             fetchPhotos(query, isSearch = false) // Fetch new images based on selection
         }
@@ -162,7 +163,7 @@ class ExploreFragment : Fragment(){
     }
 
     private fun showLocationPermissionDialog() {
-        val dialog = LocationPermissionDialogFragment()
+        val dialog = LocationPermissionDialogFragment{toggleLocationCard()}
         dialog.show(parentFragmentManager, "LocationPermissionDialog")
     }
 
@@ -177,11 +178,17 @@ class ExploreFragment : Fragment(){
     }
 
     private fun toggleLocationCard() {
-        if (binding.locationCard.visibility == View.VISIBLE) {
+        if (binding.locationCard.isVisible) {
             binding.locationCard.visibility = View.GONE
+            binding.youareatTV.visibility = View.GONE
+            binding.mapcard.visibility = View.GONE
+            binding.nearbyResults.visibility = View.GONE
         } else {
-            binding.locationCard.visibility = View.VISIBLE
             fetchLocation()
+            binding.locationCard.visibility = View.VISIBLE
+            binding.youareatTV.visibility = View.VISIBLE
+            binding.mapcard.visibility = View.VISIBLE
+            binding.nearbyResults.visibility = View.VISIBLE
         }
     }
 
@@ -214,59 +221,39 @@ class ExploreFragment : Fragment(){
     private fun fetchWeather(lat: Double, lon: Double) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val url = URL("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$weatherApiKey")
-                val connection = url.openConnection() as HttpURLConnection
-                val response = connection.inputStream.bufferedReader().use { it.readText() }
-                val jsonObject = JSONObject(response)
+                val weatherResponse = RetrofitClientWeather.weatherService.getCurrentWeather(lat, lon, weatherApiKey)
+                val tempCelsius = (weatherResponse.main.temp - 273.15).toInt()
+                val feelsLikeC = (weatherResponse.main.feels_like - 273.15).toInt()
+                val minC = (weatherResponse.main.temp_min - 273.15).toInt()
+                val maxC = (weatherResponse.main.temp_max - 273.15).toInt()
 
-                val weatherArray = jsonObject.getJSONArray("weather")
-                val weatherMain = weatherArray.getJSONObject(0).getString("main")
-
-                val main = jsonObject.getJSONObject("main")
-                val tempKelvin = main.getDouble("temp")
-                val feelsLike = main.getDouble("feels_like")
-                val tempMin = main.getDouble("temp_min")
-                val tempMax = main.getDouble("temp_max")
-                val humidity = main.getInt("humidity")
-                val seaLevel = main.optInt("sea_level", -1)
-
-                val visibility = jsonObject.optInt("visibility", -1)
-                val windSpeed = jsonObject.getJSONObject("wind").getDouble("speed")
-
-                val sys = jsonObject.getJSONObject("sys")
-                val sunrise = sys.getLong("sunrise")
-                val sunset = sys.getLong("sunset")
-
-                val tempCelsius = (tempKelvin - 273.15).toInt()
-                val feelsLikeC = (feelsLike - 273.15).toInt()
-                val minC = (tempMin - 273.15).toInt()
-                val maxC = (tempMax - 273.15).toInt()
-
-                val formatter = java.text.SimpleDateFormat("hh:mm a", Locale.getDefault())
-                formatter.timeZone = java.util.TimeZone.getDefault()
+                val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+                formatter.timeZone = TimeZone.getDefault()
                 val places = fetchNearbyPlacesWithImages(lat, lon)
                 places.forEach {
                     Log.d("NearbyPlace", "${it.title} - ${it.distance}m - ${it.thumbnailUrl}")
                 }
 
                 withContext(Dispatchers.Main) {
-                    binding.weatherConditionText.text = "Condition: $weatherMain"
+                    binding.weatherConditionText.text = "Condition: ${weatherResponse.weather[0].main}"
                     binding.weatherTempText.text = "Temp: $tempCelsius°C"
                     binding.weatherFeelsLike.text = "Feels like: $feelsLikeC°C"
-                    binding.weatherHumidity.text = "Humidity: $humidity%"
-                    binding.weatherVisibility.text = "Visibility: ${if (visibility != -1) "$visibility m" else "N/A"}"
-                    binding.weatherWindSpeed.text = "Wind Speed: $windSpeed m/s"
-                    binding.weatherSunrise.text = "Sunrise: ${formatter.format(sunrise * 1000)}"
-                    binding.weatherSunset.text = "Sunset: ${formatter.format(sunset * 1000)}"
-                    binding.weatherSeaLevel.text = if (seaLevel != -1) "Sea Level: $seaLevel hPa" else "Sea Level: N/A"
+                    binding.weatherHumidity.text = "Humidity: ${weatherResponse.main.humidity}%"
+                    binding.weatherVisibility.text = "Visibility: ${weatherResponse.visibility ?: "N/A"} m"
+                    binding.weatherWindSpeed.text = "Wind Speed: ${weatherResponse.wind.speed} m/s"
+                    binding.weatherSunrise.text = "Sunrise: ${formatter.format(weatherResponse.sys.sunrise * 1000)}"
+                    binding.weatherSunset.text = "Sunset: ${formatter.format(weatherResponse.sys.sunset * 1000)}"
+                    binding.weatherSeaLevel.text = weatherResponse.main.sea_level?.let {
+                        "Sea Level: $it hPa"
+                    } ?: "Sea Level: N/A"
                     binding.weatherMinMax.text = "Min/Max: $minC / $maxC °C"
 
                     binding.weatherConditionText.visibility = View.VISIBLE
                     binding.weatherTempText.visibility = View.VISIBLE
                     binding.weatherBackground.visibility = View.VISIBLE
 
-
-                    val backgroundRes = when (weatherMain.lowercase()) {
+                    val condition = weatherResponse.weather[0].main.lowercase()
+                    val backgroundRes = when (condition) {
                         "clear" -> R.drawable.sunny_bg
                         "clouds" -> R.drawable.cloudy_bg
                         "rain" -> R.drawable.rainy_bg
@@ -274,7 +261,6 @@ class ExploreFragment : Fragment(){
                         "thunderstorm" -> R.drawable.thunder_bg
                         else -> R.drawable.default_weather_bg
                     }
-
                     binding.weatherBackground.setImageResource(backgroundRes)
 
                     val adapter = NearbyPlaceAdapter(places)
@@ -313,12 +299,10 @@ class ExploreFragment : Fragment(){
         }
     }
     private fun addMarkerAndMoveCamera(location: LatLng) {
-        googleMap.clear() // Optional: Clear previous markers
+        googleMap.clear() // Clear previous markers
         googleMap.addMarker(MarkerOptions().position(location).title("Selected Location"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
-
-
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1001
