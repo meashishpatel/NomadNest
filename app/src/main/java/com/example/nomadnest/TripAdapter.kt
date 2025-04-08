@@ -19,7 +19,7 @@ class TripAdapter : RecyclerView.Adapter<TripAdapter.TripViewHolder>() {
         fun bind(trip: Trip) {
             view.findViewById<TextView>(R.id.destinationTextView).text = trip.destination
             view.findViewById<TextView>(R.id.dateTextView).text = trip.date
-            view.findViewById<TextView>(R.id.budgetTextView).text = "Budget: ₹${trip.budget}"
+            view.findViewById<TextView>(R.id.budgetTextView).text = "Budget: ${trip.budget}"
         }
     }
 

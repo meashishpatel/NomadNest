@@ -90,6 +90,7 @@ class ExploreFragment : Fragment(){
                 toggleLocationCard()
             } else {
                 showLocationPermissionDialog()
+                toggleLocationCard()
             }
         }
         // Set Default Images (for Adventure Travel)
@@ -300,7 +301,7 @@ class ExploreFragment : Fragment(){
     }
     private fun addMarkerAndMoveCamera(location: LatLng) {
         googleMap.clear() // Clear previous markers
-        googleMap.addMarker(MarkerOptions().position(location).title("Selected Location"))
+        googleMap.addMarker(MarkerOptions().position(location).title("You"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
 

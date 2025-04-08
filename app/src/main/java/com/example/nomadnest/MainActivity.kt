@@ -74,14 +74,6 @@ class MainActivity : AppCompatActivity() {
             val signInIntent = googleSignInClient.signInIntent
             googleSignInLauncher.launch(signInIntent)
         }
-        val serviceIntent = Intent(this, LocationForegroundService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
-        val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-        startActivity(intent)
     }
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
