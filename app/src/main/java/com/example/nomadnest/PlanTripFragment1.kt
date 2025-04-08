@@ -71,7 +71,6 @@ class PlanTripFragment1 : Fragment() {
 
         // Handle Next Button Click
         binding.nextbtn.setOnClickListener {
-            val fragment = PlanTripFragment4()
             loadFragment(PlanTripFragment2())  // Load Next Fragment
         }
         setupImageSelection()

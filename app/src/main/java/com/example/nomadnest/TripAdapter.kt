@@ -6,13 +6,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 
-class TripAdapter(private val trips: List<Trip>) :
-    RecyclerView.Adapter<TripAdapter.TripViewHolder>() {
+class TripAdapter : RecyclerView.Adapter<TripAdapter.TripViewHolder>() {
 
-    inner class TripViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val destination = itemView.findViewById<TextView>(R.id.destinationTextView)
-        val date = itemView.findViewById<TextView>(R.id.dateTextView)
-        val budget = itemView.findViewById<TextView>(R.id.budgetTextView)
+    private var tripList = listOf<Trip>()
+
+    fun submitList(trips: List<Trip>) {
+        tripList = trips
+        notifyDataSetChanged()
+    }
+
+    inner class TripViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(trip: Trip) {
+            view.findViewById<TextView>(R.id.destinationTextView).text = trip.destination
+            view.findViewById<TextView>(R.id.dateTextView).text = trip.date
+            view.findViewById<TextView>(R.id.budgetTextView).text = "Budget: ₹${trip.budget}"
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripViewHolder {
@@ -21,11 +29,8 @@ class TripAdapter(private val trips: List<Trip>) :
     }
 
     override fun onBindViewHolder(holder: TripViewHolder, position: Int) {
-        val trip = trips[position]
-        holder.destination.text = trip.destination
-        holder.date.text = trip.date
-        holder.budget.text = trip.budget
+        holder.bind(tripList[position])
     }
 
-    override fun getItemCount(): Int = trips.size
+    override fun getItemCount() = tripList.size
 }

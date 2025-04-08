@@ -29,7 +29,7 @@ class CategoryAdapter(
         holder.text.text = category.name
         holder.icon.setImageResource(category.iconRes)
 
-        // ✅ Change selection appearance
+        //  Change selection appearance
         holder.cardView.isSelected = category.isSelected
         holder.icon.setColorFilter(
             if (category.isSelected) holder.itemView.context.getColor(R.color.blue)
@@ -40,7 +40,7 @@ class CategoryAdapter(
             else holder.itemView.context.getColor(R.color.gray)
         )
 
-        // ✅ Handle Category Click
+        //  Handle Category Click
         holder.cardView.setOnClickListener {
             categories.forEach { it.isSelected = false } // Unselect all
             category.isSelected = true // Select the clicked one

@@ -31,18 +31,19 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class ExploreFragment : Fragment(), OnMapReadyCallback {
+class ExploreFragment : Fragment(){
 
     private var _binding: FragmentExploreFramentBinding? = null
     private val binding get() = _binding!!
     private val apiKey = "hNZUWMh0arq8aRNHLgNllKXcryGFHtNWX5VOL9S9PtxKm37nnnnPypQt"
     private val weatherApiKey = "ddc71934dab246249b9a80326c66ce06"
 
-    private lateinit var mMap: GoogleMap
+    private lateinit var googleMap: GoogleMap
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -71,7 +72,7 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
             Category("Sea", R.drawable.sea)
         )
 
-        // ✅ Map categories to API queries
+        //  Map categories to API queries
         val categoryToQuery = mapOf(
             "Adventure Travel" to "mountains",
             "City Breaks" to "city",
@@ -95,6 +96,8 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
             val query = categoryToQuery[selectedCategory.name] ?: "nature"
             if(query == "seeNearby"){
                 askForLocation()
+                binding.youareatTV.visibility = View.VISIBLE
+                binding.mapcard.visibility = View.VISIBLE
             }
             fetchPhotos(query, isSearch = false) // Fetch new images based on selection
         }
@@ -116,39 +119,30 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
                 false
             }
         }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync { map ->
+            googleMap = map
+        }
     }
 
     private fun fetchPhotos(query: String, isSearch: Boolean) {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             try {
-                val url = URL("https://api.pexels.com/v1/search?query=$query&per_page=10")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.setRequestProperty("Authorization", apiKey)
-
-                val response = connection.inputStream.bufferedReader().use { it.readText() }
-                val jsonObject = JSONObject(response)
-                val photosArray = jsonObject.getJSONArray("photos")
-
-                val photos = mutableListOf<Photo>()
-                for (i in 0 until photosArray.length()) {
-                    val photoObj = photosArray.getJSONObject(i)
-                    val id = photoObj.getInt("id")
-                    val alt = photoObj.getString("alt")
-                    val photographer = photoObj.getString("photographer")
-                    val imageUrl = photoObj.getJSONObject("src").getString("medium")
-
-                    photos.add(Photo(id, alt, photographer, imageUrl))
-                }
+                val api = RetrofitInstancePexels.getRetrofitInstance(apiKey)
+                val response = api.searchPhotos(query)
 
                 withContext(Dispatchers.Main) {
-                    binding.recyclerViewPhotos.adapter = PhotoAdapter(photos)
-                    if (isSearch) {
-                        binding.recyclerViewPhotos.layoutManager = LinearLayoutManager(requireContext())
-                        binding.recyclerViewPhotos.visibility = View.VISIBLE
-                    } else {
-                        binding.recyclerViewPhotos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                        binding.recyclerViewPhotos.visibility = View.VISIBLE
-                    }
+                    val photos = response.photos
+                    binding.recyclerViewPhotos.adapter = PhotoAdapter(photos.map {
+                        Photo(it.id, it.alt, it.photographer, it.src)
+                    })
+
+                    binding.recyclerViewPhotos.layoutManager =
+                        if (isSearch) LinearLayoutManager(requireContext())
+                        else LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+                    binding.recyclerViewPhotos.visibility = View.VISIBLE
                 }
 
             } catch (e: Exception) {
@@ -157,6 +151,7 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }
+        binding.categoryTV.text = query.capitalize()
     }
 
 
@@ -198,6 +193,9 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
             location?.let {
                 binding.latLngText.text = "Lat, Lng: ${it.latitude}, ${it.longitude}"
                 getAddress(it.latitude, it.longitude)
+                // Set your desired location here
+                val targetLocation = LatLng(it.latitude, it.longitude)
+                addMarkerAndMoveCamera(targetLocation)
             } ?: run {
                 Toast.makeText(requireContext(), "Failed to get location", Toast.LENGTH_SHORT).show()
             }
@@ -246,6 +244,10 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
 
                 val formatter = java.text.SimpleDateFormat("hh:mm a", Locale.getDefault())
                 formatter.timeZone = java.util.TimeZone.getDefault()
+                val places = fetchNearbyPlacesWithImages(lat, lon)
+                places.forEach {
+                    Log.d("NearbyPlace", "${it.title} - ${it.distance}m - ${it.thumbnailUrl}")
+                }
 
                 withContext(Dispatchers.Main) {
                     binding.weatherConditionText.text = "Condition: $weatherMain"
@@ -263,6 +265,7 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
                     binding.weatherTempText.visibility = View.VISIBLE
                     binding.weatherBackground.visibility = View.VISIBLE
 
+
                     val backgroundRes = when (weatherMain.lowercase()) {
                         "clear" -> R.drawable.sunny_bg
                         "clouds" -> R.drawable.cloudy_bg
@@ -273,6 +276,11 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
                     }
 
                     binding.weatherBackground.setImageResource(backgroundRes)
+
+                    val adapter = NearbyPlaceAdapter(places)
+                    binding.nearbyResults.adapter = adapter
+                    binding.nearbyResults.layoutManager = LinearLayoutManager(requireContext())
+                    binding.nearbyResults.visibility = View.VISIBLE
                 }
 
             } catch (e: Exception) {
@@ -282,14 +290,35 @@ class ExploreFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
+    private suspend fun fetchNearbyPlacesWithImages(lat: Double, lon: Double): List<NearbyPlace> {
+        return try {
+            val coord = "$lat|$lon"
+            val geoResponse = WikipediaClient.api.getNearbyPlaces(coord = coord)
 
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
+            val places = geoResponse.query.geosearch
+            val titles = places.joinToString("|") { it.title }
+
+            val imageResponse = WikipediaClient.api.getPageImages(titles = titles)
+
+            val imageMap = imageResponse.query.pages
+
+            return places.map { place ->
+                val thumbnailUrl = imageMap.values.find { it.title == place.title }?.thumbnail?.source
+                NearbyPlace(title = place.title, distance = place.dist, thumbnailUrl = thumbnailUrl)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
     }
+    private fun addMarkerAndMoveCamera(location: LatLng) {
+        googleMap.clear() // Optional: Clear previous markers
+        googleMap.addMarker(MarkerOptions().position(location).title("Selected Location"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+    }
+
+
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1001

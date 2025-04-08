@@ -12,4 +12,8 @@ interface TripDao {
 
     @Query("SELECT * FROM trips WHERE userId = :userId")
     fun getAllTripsForUser(userId: String): List<Trip>
+
+    @Query("SELECT * FROM trips WHERE destination = :destination LIMIT 1")
+    suspend fun getTripByDestination(destination: String): Trip?
+
 }

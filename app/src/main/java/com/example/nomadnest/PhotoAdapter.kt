@@ -14,7 +14,7 @@ class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<Photo
             binding.tvAlt.text = photo.alt
             binding.tvPhotographer.text = "By: ${photo.photographer}"
             Glide.with(binding.root.context)
-                .load(photo.url)
+                .load(photo.src.medium)
                 .into(binding.ivPhoto)
         }
     }

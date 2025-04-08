@@ -77,11 +77,27 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/youareatTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are At"
+            android:visibility="gone"
+            android:textAppearance="@style/press_start"
+            android:lineSpacingExtra="0sp"
+            android:gravity="top"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="20dp"/>
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/mapcard"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="500dp"
             android:layout_gravity="center"
+            android:visibility="gone"
             app:cardElevation="4dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="5dp"
             app:cardCornerRadius="8dp">
 
         <fragment
@@ -209,6 +225,13 @@
             android:id="@+id/recyclerViewCategories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nearbyResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
             android:padding="8dp"/>
 
         <androidx.recyclerview.widget.RecyclerView

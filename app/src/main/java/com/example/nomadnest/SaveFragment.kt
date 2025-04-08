@@ -1,28 +1,24 @@
 package com.example.nomadnest
 
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nomadnest.databinding.FragmentExploreFramentBinding
 import com.example.nomadnest.databinding.FragmentSaveBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SaveFragment : Fragment() {
 
     private var _binding: FragmentSaveBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var tripDao: TripDao
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
-    private lateinit var tripAdapter: TripAdapter
+    private lateinit var tripAdapter: TripAdapter  // RecyclerView Adapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,44 +31,31 @@ class SaveFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val auth = FirebaseAuth.getInstance()
-        val userId = auth.currentUser?.uid ?: return
-        val db = AppDatabase.getDatabase(requireContext())
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val localTrips = db.tripDao().getAllTripsForUser(userId)
-
-            // Now update the UI safely on the Main thread
-            launch(Dispatchers.Main) {
-                if (localTrips.isNotEmpty()) {
-                    showTripsInRecyclerView(localTrips)
-                } else {
-                    fetchTripsFromFirebase(userId)
-                }
-            }
-        }
+        setupRecyclerView()
+        val userId = auth.currentUser?.uid
+        userId?.let { fetchUserTrips(it) }
     }
 
-    private fun showTripsInRecyclerView(trips: List<Trip>) {
-        val adapter = TripAdapter(trips)
-        binding.tripsRecyclerView.adapter = adapter
-        binding.tripsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    private fun setupRecyclerView() {
+        tripAdapter = TripAdapter()
+        binding.tripsRecyclerView.adapter = tripAdapter
     }
 
-    private fun fetchTripsFromFirebase(userId: String) {
-        val firestore = FirebaseFirestore.getInstance()
+    private fun fetchUserTrips(userId: String) {
         firestore.collection("tripDetails")
             .whereEqualTo("userId", userId)
             .get()
-            .addOnSuccessListener { documents ->
-                val trips = documents.mapNotNull { it.toObject(Trip::class.java) }
-                showTripsInRecyclerView(trips)
+            .addOnSuccessListener { snapshot ->
+                val trips = snapshot.documents.mapNotNull { it.toObject(Trip::class.java) }
+                tripAdapter.submitList(trips)
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Failed to load trips", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to fetch trips", Toast.LENGTH_SHORT).show()
             }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
