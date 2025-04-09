@@ -23,6 +23,13 @@
         android:theme="@style/Theme.NomadNest"
         tools:targetApi="31">
 
+        <service
+            android:name=".LocationForegroundService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location"/>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9fd-gkN-EfVXhlcJEdfGOgZradJjiSfQ" />
