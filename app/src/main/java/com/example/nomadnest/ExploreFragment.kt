@@ -25,6 +25,7 @@ import java.net.URL
 import java.util.Locale
 import android.Manifest;
 import android.app.AlertDialog
+import android.graphics.Color
 import android.widget.Button
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat;
@@ -37,9 +38,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.text.SimpleDateFormat
 import java.util.TimeZone
 import androidx.core.view.isVisible
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import kotlin.math.log
 
 
-class ExploreFragment : Fragment(){
+class ExploreFragment : Fragment(), OnMapReadyCallback{
 
     private var _binding: FragmentExploreFramentBinding? = null
     private val binding get() = _binding!!
@@ -50,12 +55,22 @@ class ExploreFragment : Fragment(){
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private val database = FirebaseDatabase.getInstance().getReference("locations")
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "anonymous"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExploreFramentBinding.inflate(inflater, container, false)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.movement_map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
         return binding.root
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+        fetchAndDisplayLocations()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,7 +116,10 @@ class ExploreFragment : Fragment(){
             if(query == "seeNearby"){
                 askForLocation()
             }
-            fetchPhotos(query, isSearch = false) // Fetch new images based on selection
+            else{
+                fetchPhotos(query, isSearch = false)
+                hideNearbyItems()
+            }
         }
 
         binding.recyclerViewCategories.adapter = categoryAdapter
@@ -115,10 +133,21 @@ class ExploreFragment : Fragment(){
                     // 🔽 Hide the keyboard
                     val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
                     imm.hideSoftInputFromWindow(binding.searchbox.windowToken, 0)
+                    hideNearbyItems()
                 }
                 true
             } else {
                 false
+            }
+        }
+        binding.searchbtn.setOnClickListener{
+            val searchQuery = binding.searchbox.text.toString().trim()
+            if (searchQuery.isNotEmpty()) {
+                fetchPhotos(searchQuery, isSearch = true)
+                //  Hide the keyboard
+                val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(binding.searchbox.windowToken, 0)
+                hideNearbyItems()
             }
         }
 
@@ -180,16 +209,15 @@ class ExploreFragment : Fragment(){
 
     private fun toggleLocationCard() {
         if (binding.locationCard.isVisible) {
-            binding.locationCard.visibility = View.GONE
-            binding.youareatTV.visibility = View.GONE
-            binding.mapcard.visibility = View.GONE
-            binding.nearbyResults.visibility = View.GONE
+            hideNearbyItems()
+            binding.recyclerViewPhotos.visibility = View.VISIBLE
         } else {
             fetchLocation()
             binding.locationCard.visibility = View.VISIBLE
             binding.youareatTV.visibility = View.VISIBLE
             binding.mapcard.visibility = View.VISIBLE
             binding.nearbyResults.visibility = View.VISIBLE
+            binding.recyclerViewPhotos.visibility = View.GONE
         }
     }
 
@@ -303,6 +331,45 @@ class ExploreFragment : Fragment(){
         googleMap.clear() // Clear previous markers
         googleMap.addMarker(MarkerOptions().position(location).title("You"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+    }
+    private fun hideNearbyItems(){
+        binding.mapcard.visibility = View.GONE
+        binding.nearbyResults.visibility = View.GONE
+        binding.locationCard.visibility = View.GONE
+        binding.youareatTV.visibility = View.GONE
+    }
+
+    private fun fetchAndDisplayLocations() {
+        database.child(userId).get().addOnSuccessListener { snapshot ->
+            Log.d("sfasdfsa", "$userId")
+            val points = mutableListOf<LatLng>()
+
+            for (child in snapshot.children) {
+                val lat = child.child("latitude").getValue(Double::class.java)
+                val lng = child.child("longitude").getValue(Double::class.java)
+                if (lat != null && lng != null) {
+                    points.add(LatLng(lat, lng))
+                }
+            }
+
+            if (points.isNotEmpty()) {
+                // Move camera to the first point
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(points.first(), 15f))
+
+                Log.d("fasdfsdf", "$points")
+
+                // Draw path
+                val polylineOptions = PolylineOptions().addAll(points).color(Color.BLUE).width(5f)
+                googleMap.addPolyline(polylineOptions)
+
+                // Optional: Add markers
+                for (point in points) {
+                    googleMap.addMarker(MarkerOptions().position(point))
+                }
+            }
+        }.addOnFailureListener {
+            Log.e("MapFirebase", "Error fetching locations: ${it.message}")
+        }
     }
 
     companion object {
