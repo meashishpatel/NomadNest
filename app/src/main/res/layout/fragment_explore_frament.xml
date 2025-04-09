@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExploreFragment"
+    tools:context=".ui.main.ExploreFragment"
     android:fillViewport="true">
 
     <LinearLayout
@@ -89,25 +89,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginStart="20dp"/>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/mapcard"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            app:cardElevation="4dp"
-            android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardCornerRadius="8dp">
 
-        <fragment
-            android:id="@+id/map_fragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
-
-    </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/locationCard"
@@ -208,22 +190,54 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/youractivityTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Movements"
+            android:textAppearance="@style/press_start"
+            android:lineSpacingExtra="0sp"
+            android:gravity="top"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="20dp"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/movementCard"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             app:cardElevation="4dp"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="5dp"
             app:cardCornerRadius="8dp">
 
-        <fragment
-            android:id="@+id/movement_map_fragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            <!-- FrameLayout to stack the TextView on top of the map -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/mapfragment"
+                    android:layout_height="match_parent">
+                    <fragment
+                        android:id="@+id/movement_map_fragment"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+               <TextView
+                    android:id="@+id/enablelocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="Enable your location from Profile>Account and Security"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:background="@android:color/black"
+                    android:alpha="0.7" /> <!-- Optional: background with some transparency -->
+
+            </FrameLayout>
+
         </androidx.cardview.widget.CardView>
 
         <TextView

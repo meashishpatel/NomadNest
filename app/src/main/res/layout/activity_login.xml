@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".LoginActivity">
+    tools:context=".auth.LoginActivity">
 
     <!-- Background Frame -->
     <FrameLayout
@@ -60,6 +60,8 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:background="@drawable/buttons_bg"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
         app:layout_constraintTop_toBottomOf="@id/emailTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +88,8 @@
         android:drawablePadding="10dp"
         android:padding="12dp"
         android:textSize="16sp"
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"
         android:background="@drawable/buttons_bg"
         app:layout_constraintTop_toBottomOf="@id/passwordTV"
         app:layout_constraintStart_toStartOf="parent"

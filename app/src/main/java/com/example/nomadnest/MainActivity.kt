@@ -1,9 +1,7 @@
 package com.example.nomadnest
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +15,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import android.provider.Settings
+import com.example.nomadnest.auth.AuthenticationActivity
+import com.example.nomadnest.auth.SignUpActivity
+import com.example.nomadnest.data.models.UserProfile
+import com.example.nomadnest.ui.main.HomeActivity
 
 class MainActivity : AppCompatActivity() {
 
