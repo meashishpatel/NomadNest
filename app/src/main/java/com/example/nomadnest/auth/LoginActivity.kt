@@ -131,7 +131,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null)
                 {
                     sharedPreferences.edit {
-                        putString("userId", user.uid) // 👈 Save userId
+                        putString("userId", user.uid) // Save userId
                         apply()
                     }
                     // Save to Firestore if user doc doesn't exist

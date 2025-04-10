@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 class AccountAndSecurity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAccountAndSecurityBinding
-    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,6 @@ class AccountAndSecurity : AppCompatActivity() {
         }
 
         val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val db = AppDatabase.getDatabase(applicationContext)
 
 
         // Restore saved switch state

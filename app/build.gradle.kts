@@ -94,4 +94,6 @@ dependencies {
     // Google Maps
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
 
+    // Detecting memory leaks
+//    debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.14")
 }

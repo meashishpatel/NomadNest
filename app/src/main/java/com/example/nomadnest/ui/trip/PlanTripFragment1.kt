@@ -18,12 +18,10 @@ import com.example.nomadnest.utils.TripSharedViewModel
 import com.example.nomadnest.adapters.LocationSuggestionAdapter
 import com.example.nomadnest.data.models.LocationResponseItem
 import com.example.nomadnest.databinding.FragmentPlanTrip1Binding
+import com.example.nomadnest.ui.main.TripDetailsActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
-
-
-
 
 
 class PlanTripFragment1 : Fragment() {

@@ -57,8 +57,6 @@ class SaveFragment : Fragment() {
             onDeleteClick = { trip -> deleteTrip(trip) }
         )
         binding.tripsRecyclerView.adapter = tripAdapter
-
-        binding.tripsRecyclerView.adapter = tripAdapter
     }
 
     private fun deleteTrip(trip: Trip) {
@@ -140,8 +138,6 @@ class SaveFragment : Fragment() {
             }
         }
     }
-
-
 
 
     override fun onDestroyView() {

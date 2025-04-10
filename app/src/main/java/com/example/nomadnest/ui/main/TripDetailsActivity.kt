@@ -1,4 +1,4 @@
-package com.example.nomadnest.ui.trip
+package com.example.nomadnest.ui.main
 
 
 import android.os.Bundle
@@ -7,19 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.example.nomadnest.ui.shared.PlanFragment
 import com.example.nomadnest.R
 import com.example.nomadnest.data.db.AppDatabase
 import com.example.nomadnest.databinding.ActivityTripDetailsBinding
+import com.example.nomadnest.ui.trip.PlanFragment
+import com.example.nomadnest.ui.trip.PlanTripFragment1
+import com.example.nomadnest.ui.trip.PlanTripFragment2
+import com.example.nomadnest.ui.trip.PlanTripFragment3
+import com.example.nomadnest.ui.trip.PlanTripFragment4
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class TripDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTripDetailsBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: AppDatabase
-    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,6 +38,7 @@ class TripDetailsActivity : AppCompatActivity() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
             when (currentFragment){
                 is PlanTripFragment1 ->{
+                    finish()
                     loadFragment(PlanFragment())
                 }
                 is PlanTripFragment2 ->{

@@ -207,7 +207,7 @@
             android:layout_gravity="center"
             app:cardElevation="4dp"
             android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="12dp"
             app:cardCornerRadius="8dp">
 
             <!-- FrameLayout to stack the TextView on top of the map -->

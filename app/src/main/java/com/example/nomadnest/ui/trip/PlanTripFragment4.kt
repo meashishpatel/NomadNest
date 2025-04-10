@@ -24,6 +24,7 @@ import com.example.nomadnest.data.db.AppDatabase
 import com.example.nomadnest.data.models.Trip
 import com.example.nomadnest.utils.scheduleTripNotification
 import com.example.nomadnest.ui.main.HomeActivity
+import com.example.nomadnest.ui.main.TripDetailsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -127,7 +128,7 @@ class PlanTripFragment4 : Fragment() {
                 .document(trip.userId + "_" + trip.destination)
                 .set(trip)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Trip synced to Firebase", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), "Trip synced to Firebase", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Failed to sync trip", Toast.LENGTH_SHORT).show()

@@ -119,10 +119,10 @@ class ProfileActivity : AppCompatActivity() {
         firestore.collection("users").document(userProfile.userId)
             .set(userProfile)
             .addOnSuccessListener {
-                Toast.makeText(this, "Profile synced to Firebase", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Profile synced to Firebase", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Failed to sync profile", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Failed to sync profile", Toast.LENGTH_SHORT).show()
             }
     }
 

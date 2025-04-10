@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.nomadnest.R
 import com.example.nomadnest.utils.TripSharedViewModel
 import com.example.nomadnest.databinding.FragmentPlanTrip3Binding
+import com.example.nomadnest.ui.main.TripDetailsActivity
 
 
 class PlanTripFragment3 : Fragment() {

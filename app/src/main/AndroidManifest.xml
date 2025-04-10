@@ -54,7 +54,7 @@
             android:value="AIzaSyC9fd-gkN-EfVXhlcJEdfGOgZradJjiSfQ" />
 
         <activity
-            android:name=".ui.trip.TripDetailsActivity"
+            android:name=".ui.main.TripDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.ProfileActivity"

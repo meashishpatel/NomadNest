@@ -17,7 +17,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import com.example.nomadnest.databinding.ActivityHomeBinding
 import androidx.work.WorkManager
 import com.example.nomadnest.services.LocationForegroundService
-import com.example.nomadnest.ui.shared.PlanFragment
+import com.example.nomadnest.ui.trip.PlanFragment
 import com.example.nomadnest.R
 import java.util.concurrent.TimeUnit
 import com.example.nomadnest.services.TripSyncWorker
@@ -80,6 +80,9 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        binding.backbtn.setOnClickListener {
+            loadFragment(ExploreFragment())
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -88,7 +91,7 @@ class HomeActivity : AppCompatActivity() {
             .commit()
     }
 
-    // ✅ Runtime location permission logic
+    // Runtime location permission logic
     private fun checkLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED

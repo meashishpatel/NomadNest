@@ -12,3 +12,4 @@ object WikipediaClient {
 
     val api: WikipediaApiService = retrofit.create(WikipediaApiService::class.java)
 }
+    

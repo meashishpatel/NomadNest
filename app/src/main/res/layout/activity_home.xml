@@ -20,14 +20,14 @@
 
         <ImageView
             android:id="@+id/backbtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/leftnavigationic"/>
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/splash_img"
             android:layout_marginStart="20dp"/>
 
@@ -35,6 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nomad Nest"
+            android:textStyle="bold"
+            android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
 

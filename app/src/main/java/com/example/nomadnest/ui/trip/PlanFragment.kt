@@ -1,4 +1,4 @@
-package com.example.nomadnest.ui.shared
+package com.example.nomadnest.ui.trip
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nomadnest.databinding.FragmentPlanBinding
-import com.example.nomadnest.ui.trip.TripDetailsActivity
+import com.example.nomadnest.ui.main.TripDetailsActivity
 
 class PlanFragment : Fragment() {
 
