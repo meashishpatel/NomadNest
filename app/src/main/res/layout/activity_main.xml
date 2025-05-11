@@ -1,0 +1,213 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:id="@+id/main"
+    android:padding="24dp"
+    android:background="@drawable/home_bg">
+
+    <TextView
+        android:id="@+id/getStartedTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getStarted"
+        android:textAppearance="@style/getStarted"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/welcome_toTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_"
+        android:textAppearance="@style/welcome_to_"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Google Button -->
+    <FrameLayout
+        android:id="@+id/continuewithgooglebtnm"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttons_bg"
+        android:layout_marginTop="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google_ic"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_button_google"
+                android:textAppearance="@style/text_button"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Facebook Button -->
+    <FrameLayout
+        android:id="@+id/continuewithfacebookbtnm"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttons_bg"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/facebook_ic"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_button_facebook"
+                android:textAppearance="@style/text_button"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Apple Button -->
+    <FrameLayout
+        android:id="@+id/continuewithapplebtnm"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttons_bg"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/apple_ic"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_button_apple"
+                android:textAppearance="@style/text_button"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/continuewithapplebtnm"
+        app:layout_constraintBottom_toTopOf="@id/loginbtn">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:dividerColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/orTextView"
+            app:layout_constraintTop_toTopOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="@id/divider"
+            app:layout_constraintWidth_percent="0.4"/>  <!-- Adjust width dynamically -->
+
+        <TextView
+            android:id="@+id/orTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/divider"
+            app:layout_constraintEnd_toStartOf="@id/divider2"
+            app:layout_constraintStart_toEndOf="@id/divider1"
+            app:layout_constraintTop_toTopOf="@id/divider" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:dividerColor="@color/grey"
+            app:layout_constraintStart_toEndOf="@id/orTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="@id/divider"
+            app:layout_constraintWidth_percent="0.4"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Login Button -->
+    <FrameLayout
+        android:id="@+id/loginbtn"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:background="@drawable/blue_btn_bg"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_button_login"
+                android:textAppearance="@style/text_button_login"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/dna1textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account?"
+            app:layout_constraintEnd_toStartOf="@id/signuptextview"
+            app:layout_constraintStart_toStartOf="@id/linear1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/signuptextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="Sign Up"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/dna1textview"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
+
+</LinearLayout>

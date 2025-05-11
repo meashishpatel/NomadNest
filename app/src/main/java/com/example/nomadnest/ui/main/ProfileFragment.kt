@@ -1,0 +1,57 @@
+package com.example.nomadnest.ui.main
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.nomadnest.ui.shared.LogoutBottomSheet
+import com.example.nomadnest.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+
+class ProfileFragment : Fragment() {
+
+    private var _binding: FragmentProfileBinding? = null  // Updated Binding Class
+    private val binding get() = _binding!!
+    val logoutSheet = LogoutBottomSheet()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
+        currentUser?.let {
+            // Set name and email in TextViews
+            binding.nametv.text = it.displayName ?: "Name not available"
+            binding.emailtv.text = it.email ?: "Email not available"
+        }
+
+        binding.logoutbtn.setOnClickListener{
+            logoutSheet.show(parentFragmentManager, "LogoutBottomSheet")
+        }
+
+        binding.personalInfobtn.setOnClickListener {
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        }
+        binding.accountandsecuritybtn.setOnClickListener {
+            startActivity(Intent(requireContext(), AccountAndSecurity::class.java))
+        }
+        binding.helpAndSupportBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), HelpAndSupport::class.java))
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/location_permission_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location_permission"
+        android:textAppearance="@style/getStarted"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
+
+
+    <FrameLayout
+        android:id="@+id/locationFrame"
+        android:layout_width="match_parent"
+        android:layout_height="312dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/map_bg"
+        app:layout_constraintTop_toBottomOf="@id/location_permission_tv">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/pointer"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/whatLocationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/what_is_your_location"
+        android:textAppearance="@style/getStarted"
+        app:layout_constraintTop_toBottomOf="@id/locationFrame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/loc_desc"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:text="@string/loc_desc"
+        android:textAppearance="@style/welcome_to_"
+        android:gravity="center"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintTop_toBottomOf="@id/whatLocationTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <FrameLayout
+        android:id="@+id/allowButton"
+        android:layout_width="400dp"
+        android:layout_height="48dp"
+        android:background="@drawable/blue_btn_bg"
+        app:layout_constraintTop_toBottomOf="@id/loc_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Allow"
+                android:textAppearance="@style/text_button_login"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/skipButton"
+        android:layout_width="400dp"
+        android:layout_height="48dp"
+        android:background="@drawable/grey_btn_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/allowButton"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skip"
+                android:textAppearance="@style/welcome_to_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
